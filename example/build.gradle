@@ -1,0 +1,32 @@
+apply plugin: "org.springframework.boot"
+
+group = 'io.github.bhhan'
+version = '0.0.1.RELEASE'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+    implementation ("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion") {
+        exclude group: 'org.yaml', module: "snakeyaml"
+    }
+    implementation "org.yaml:snakeyaml:$snakeyamlVersion"
+    implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-validation:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+    implementation "org.flywaydb:flyway-core:$flywayVersion"
+    implementation "org.flywaydb:flyway-mysql:$flywayMysqlVersion"
+    implementation "javax.xml.bind:jaxb-api:$jaxbVersion"
+
+    implementation "com.querydsl:querydsl-jpa:$queryDslVersion:jakarta"
+    annotationProcessor "com.querydsl:querydsl-apt:$queryDslVersion:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationVersion"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:$jakartaPersistenceVersion"
+
+    runtimeOnly "mysql:mysql-connector-java:$mysqlConnectorVersion"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+}

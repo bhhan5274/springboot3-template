@@ -1,0 +1,22 @@
+<included>
+    <springProfile name="prod">
+        <property resource="logback-variables.properties" />
+
+        <appender name="prodAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_DIR}/archive/${APP_NAME}.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <maxFileSize>3KB</maxFileSize>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>
+                    [${APP_NAME}] ${LOG_PATTERN}
+                </pattern>
+            </encoder>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="prodAppender" />
+        </root>
+    </springProfile>
+</included>

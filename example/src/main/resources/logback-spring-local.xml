@@ -1,0 +1,15 @@
+<included>
+    <springProfile name="local">
+        <appender name="localAppender" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>
+                    [LOCAL] [%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%logger{0}:%line] - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+
+        <root level="debug">
+            <appender-ref ref="localAppender" />
+        </root>
+    </springProfile>
+</included>

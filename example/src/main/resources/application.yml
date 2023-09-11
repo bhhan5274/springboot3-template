@@ -1,0 +1,50 @@
+server:
+  port: 9000
+
+spring:
+  profiles:
+    active: local
+  application:
+    name: example-app
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
+    open-in-view: false
+
+  #Pageable 설정
+  data:
+    web:
+      pageable:
+        page-parameter: page
+        size-parameter: size
+        default-page-size: 10
+        max-page-size: 50
+      sort:
+        sort-parameter: sort
+
+
+  ## Hikari Pool 설정
+  # maximumPoolSize: 최대 TPS 고려 => PoolSize * (1초 / 처리횟수)
+  # connectionTimeout: 일반적인 서비스에서 길면 안 됨
+  # maxLifetime: 일정 시간만 사용하고 커넥션 종료 처리
+  # keepaliveTime: 끊길 만한 시간보다 짧은 주기로 검사
+  datasource:
+    url: jdbc:mysql://localhost:3306/bhhan?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 30
+      connection-timeout: 10000
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    url: jdbc:mysql://localhost:3306/bhhan?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    user: root
+    password: 1234
+    locations: classpath:db/migration
